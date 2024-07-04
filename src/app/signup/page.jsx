@@ -23,7 +23,7 @@ const signup = async () => {
         <h1 className='mr-[-20px]'>Sign up to start listening</h1>      
         <SignupForm/>
         <h2 className='text-[gray]'>Already have an account?
-        <Link href="/login" className='underline text-[white]'> Log in here</Link>        
+        <Link href="/login" className='underline text-[white]'> Login here</Link>        
         </h2>     
     </div>   
   )   

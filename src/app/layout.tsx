@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
+import { Nunito_Sans } from "next/font/google";
 import "./globals.css";
 import DarkModeToggle from "@/components/DarkModeToggle/DarkModeToggle";
 import {ThemeProvider} from "@/context/ThemeContext" 
 import SessionWrapper from "@/components/SessionWrapper";  
 
 
-const poppins = Poppins({ 
+const pacifico = Nunito_Sans({ 
   subsets: ["latin"],
   variable: "--my-font-family",   
-  weight: ["400", "500", "600", "700", "800", "900"]          
+  weight: ["400"]             
  });
 
 export const metadata: Metadata = {
@@ -24,7 +24,7 @@ export default function RootLayout({
 }>) {    
   return (
     <html lang="en">
-      <body className={poppins.className}>    
+      <body className={pacifico.className}>     
         <ThemeProvider>  
           <SessionWrapper>   
           <DarkModeToggle/> 

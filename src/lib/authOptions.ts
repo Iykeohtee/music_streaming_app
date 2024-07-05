@@ -17,7 +17,7 @@ export const authOptions: NextAuthOptions = {
 
           credentials: {
             username: { label: "Username", type: "username", required: true }, 
-            password: { label: "Password", type: "password", required: true },     
+            password: { label: "Password", type: "password", required: true },         
           },    
           
           async authorize(credentials, req) {   
@@ -42,7 +42,7 @@ export const authOptions: NextAuthOptions = {
                   return user;
  
                 } else {
-                  throw new Error("Incorrect Password");                           
+                  throw new Error("Incorrect Password");                                                                                    
                 }
                  
                 

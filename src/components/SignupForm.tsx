@@ -65,7 +65,7 @@ const SignupForm = () => {
                "Content-Type": "application/json"    
             },                                            
             body: JSON.stringify({
-               email,
+               email,         
                username,
                password
             }),
@@ -73,7 +73,7 @@ const SignupForm = () => {
 
          if (res.ok) {   
             (e.target as HTMLFormElement).reset();
-            router.push("/dashboard?success=Account has been created");
+            router.replace("/dashboard?success=Account has been created");
         } else {
             const errorData = await res.json();
             return NextResponse.json({errorData}) 

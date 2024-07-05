@@ -2,16 +2,23 @@
 
 import { signIn } from 'next-auth/react';
 import React, { useState, ChangeEvent, FormEvent } from 'react' 
+import { useRouter } from 'next/navigation';   
+// import Credentials from 'next-auth/providers/credentials';
 
 const LoginForm = () => {
 
     const [formData, setFormData] = useState({
-        username: '',
+        email: '',
         password: ''
     })
 
     const [ isPasswordVisible, setIsPasswordVisible ] = useState(false);
     const [ inputText, setInputText ] = useState('');
+    const [ error, setError ] = useState('');
+    const [ success, setSuccess ] = useState('');
+
+    const router = useRouter();
+  
 
   const handleChange = async (e: ChangeEvent<HTMLInputElement>) => {          
       setFormData({ ...formData, [e.target.name]: e.target.value }) 
@@ -22,11 +29,27 @@ const LoginForm = () => {
       e.preventDefault();
        
       try {
-        await signIn("credentials", {
+        // await signIn("credentials", {      
           
-        })
+        // })
+        const result = await signIn("credentials", {                         
+          username: formData.email,
+          password: formData.password,
+          redirect: false,      
+        });   
+
+        console.log(result); 
+
+      if(result?.error){
+        setError("Invalid Credentials!")        
+        return;                                                
+      } else{      
+           setSuccess("Login Seccessful...Wait👋")      
+           router.replace("/dashboard")                     
+      }         
+
       } catch (error) {
-        
+        setError("An unexpected error occured");                     
       }
 
    }
@@ -39,12 +62,12 @@ const LoginForm = () => {
     <form onSubmit={handleSubmit} className="w-[887px] flex flex-col gap-7 items-center mt-[50px]">
 
       <div className="flex flex-col w-[50%]">
-      <label htmlFor="username">Username</label>
+      <label htmlFor="email">Email</label>
       <input type="text" 
-      name='username'
-      id='username'
-      placeholder='username'   
-      value={formData.username}
+      name='email'
+      id='email'
+      placeholder='email'   
+      value={formData.email}
       onChange={handleChange}
       className={ inputText.length > 0 ? 'text-white' : 'text-default'}   
       />
@@ -58,7 +81,7 @@ const LoginForm = () => {
          placeholder="Input your Password"
          value={formData.password}
          onChange={handleChange} 
-         className={inputText.length > 0 ? 'text-white' : 'text-default'} 
+         className={inputText.length > 0 ? 'text-white' : 'text-default'}                                         
         />
         <button
          onClick={togglePasswordVisibility}   
@@ -68,7 +91,9 @@ const LoginForm = () => {
         </button>
        </div>
 
-      <button type="submit" className="btn w-[50%] font-[700] text-[20px] mb-4">Next</button> 
+       { success && <span className='text-green-600'>{success}</span>}       
+       { error && <span className='text-red-700'>{error}</span>}    
+      <button type="submit" className="btn w-[50%] font-[700] text-[20px] mb-4">Next</button>           
      
 
     </form>

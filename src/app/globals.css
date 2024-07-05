@@ -7,6 +7,9 @@
   --neutral-color1 : #ffffff;
   --btn-color: #1ed760;
 }
+html{
+  font-family: 'var(--my-font-family)';    
+}
 
 *{
   margin: 0; 
@@ -15,7 +18,6 @@
 }
 
 body {
-  font-family: 'var(--my-font-family)';    
   font-weight: 400;    
   display: flex;     
   flex-direction: column; 

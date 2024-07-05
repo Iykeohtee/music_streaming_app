@@ -18,7 +18,7 @@ export const POST = async (req) => {
       }  
 
    } catch (error) {
-    console.log(error);
+    console.log(error);                                                                                                           
     return NextResponse.json({ error: "An error occurred" }, 500);       
-   }
+   }         
 }
